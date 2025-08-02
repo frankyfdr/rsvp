@@ -1,8 +1,10 @@
+'use client';
 import React, { useState } from 'react';
 import { Heart, Calendar, MapPin, Clock, Users, Mail, Phone } from 'lucide-react';
 
 const WeddingRSVP = () => {
   const [currentPage, setCurrentPage] = useState('home');
+  const [language, setLanguage] = useState('en');
   const [rsvpData, setRsvpData] = useState({
     guestName: '',
     email: '',
@@ -13,6 +15,194 @@ const WeddingRSVP = () => {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+
+  const translations = {
+    en: {
+      // Navigation
+      home: 'Home',
+      rsvp: 'RSVP',
+      details: 'Details',
+      contact: 'Contact',
+
+      // Home page
+      areGettingMarried: 'are getting married!',
+      rsvpNow: 'RSVP Now',
+
+      // RSVP page
+      rsvpTitle: 'RSVP',
+      rsvpSubtitle: 'Please let us know if you can join us',
+      fullName: 'Full Name',
+      email: 'Email',
+      phone: 'Phone',
+      willYouAttend: 'Will you be attending?',
+      yesIllBeThere: "Yes, I'll be there! ❤️",
+      sorryCannotMake: "Sorry, can't make it 😢",
+      numberOfGuests: 'Number of Guests',
+      justMe: 'Just me',
+      mePlus1: 'Me + 1',
+      mePlus2: 'Me + 2',
+      mePlus3: 'Me + 3',
+      dietaryRestrictions: 'Dietary Restrictions',
+      dietaryPlaceholder: 'Vegetarian, vegan, allergies, etc.',
+      specialMessage: 'Special Message',
+      messagePlaceholder: 'Share your excitement or well wishes...',
+      submitRsvp: 'Submit RSVP',
+      thankYou: 'Thank You!',
+      thankYouMessage: "We've received your RSVP and can't wait to celebrate with you!",
+      backToHome: 'Back to Home',
+
+      // Details page
+      weddingDetails: 'Wedding Details',
+      everythingYouNeed: 'Everything you need to know',
+      ceremony: 'Ceremony',
+      reception: 'Reception',
+      date: 'Date',
+      time: 'Time',
+      location: 'Location',
+      address: 'Address',
+      dressCode: 'Dress Code',
+      cocktailAttire: 'Cocktail Attire',
+      additionalInfo: 'Additional Information',
+      parking: 'Parking: Valet parking available at reception venue',
+      accommodations: 'Accommodations: Room blocks available at The Plaza Hotel',
+      registry: "Registry: We're registered at Williams Sonoma and Amazon",
+      photography: 'Photography: Unplugged ceremony - please enjoy the moment!',
+
+      // Contact page
+      contactUs: 'Contact Us',
+      questionsHelp: "Questions? We're here to help!",
+      bride: 'Bride',
+      groom: 'Groom',
+      weddingPlanner: 'Wedding Planner',
+
+      // Footer
+      madeWithLove: 'Made with ❤️',
+    },
+    es: {
+      // Navigation
+      home: 'Inicio',
+      rsvp: 'Confirmar',
+      details: 'Detalles',
+      contact: 'Contacto',
+
+      // Home page
+      areGettingMarried: '¡se casan!',
+      rsvpNow: 'Confirmar Ahora',
+
+      // RSVP page
+      rsvpTitle: 'Confirmar Asistencia',
+      rsvpSubtitle: 'Por favor, déjanos saber si puedes acompañarnos',
+      fullName: 'Nombre Completo',
+      email: 'Correo Electrónico',
+      phone: 'Teléfono',
+      willYouAttend: '¿Asistirás?',
+      yesIllBeThere: '¡Sí, estaré ahí! ❤️',
+      sorryCannotMake: 'Lo siento, no puedo asistir 😢',
+      numberOfGuests: 'Número de Invitados',
+      justMe: 'Solo yo',
+      mePlus1: 'Yo + 1',
+      mePlus2: 'Yo + 2',
+      mePlus3: 'Yo + 3',
+      dietaryRestrictions: 'Restricciones Dietéticas',
+      dietaryPlaceholder: 'Vegetariano, vegano, alergias, etc.',
+      specialMessage: 'Mensaje Especial',
+      messagePlaceholder: 'Comparte tu emoción o buenos deseos...',
+      submitRsvp: 'Enviar Confirmación',
+      thankYou: '¡Gracias!',
+      thankYouMessage: '¡Hemos recibido tu confirmación y esperamos celebrar contigo!',
+      backToHome: 'Volver al Inicio',
+
+      // Details page
+      weddingDetails: 'Detalles de la Boda',
+      everythingYouNeed: 'Todo lo que necesitas saber',
+      ceremony: 'Ceremonia',
+      reception: 'Recepción',
+      date: 'Fecha',
+      time: 'Hora',
+      location: 'Ubicación',
+      address: 'Dirección',
+      dressCode: 'Código de Vestimenta',
+      cocktailAttire: 'Vestimenta de Cóctel',
+      additionalInfo: 'Información Adicional',
+      parking: 'Estacionamiento: Servicio de valet disponible en el lugar de la recepción',
+      accommodations: 'Alojamiento: Habitaciones reservadas disponibles en The Plaza Hotel',
+      registry: 'Registro: Estamos registrados en Williams Sonoma y Amazon',
+      photography: 'Fotografía: Ceremonia sin dispositivos - ¡por favor disfruta el momento!',
+
+      // Contact page
+      contactUs: 'Contáctanos',
+      questionsHelp: '¿Preguntas? ¡Estamos aquí para ayudar!',
+      bride: 'Novia',
+      groom: 'Novio',
+      weddingPlanner: 'Organizador de Bodas',
+
+      // Footer
+      madeWithLove: 'Hecho con ❤️',
+    },
+    pt: {
+      // Navigation
+      home: 'Início',
+      rsvp: 'Confirmar',
+      details: 'Detalhes',
+      contact: 'Contato',
+
+      // Home page
+      areGettingMarried: 'vão se casar!',
+      rsvpNow: 'Confirmar Agora',
+
+      // RSVP page
+      rsvpTitle: 'Confirmar Presença',
+      rsvpSubtitle: 'Por favor, nos deixe saber se você pode se juntar a nós',
+      fullName: 'Nome Completo',
+      email: 'E-mail',
+      phone: 'Telefone',
+      willYouAttend: 'Você vai comparecer?',
+      yesIllBeThere: 'Sim, estarei lá! ❤️',
+      sorryCannotMake: 'Desculpe, não posso comparecer 😢',
+      numberOfGuests: 'Número de Convidados',
+      justMe: 'Apenas eu',
+      mePlus1: 'Eu + 1',
+      mePlus2: 'Eu + 2',
+      mePlus3: 'Eu + 3',
+      dietaryRestrictions: 'Restrições Alimentares',
+      dietaryPlaceholder: 'Vegetariano, vegano, alergias, etc.',
+      specialMessage: 'Mensagem Especial',
+      messagePlaceholder: 'Compartilhe sua alegria ou bons desejos...',
+      submitRsvp: 'Enviar Confirmação',
+      thankYou: 'Obrigado!',
+      thankYouMessage: 'Recebemos sua confirmação e mal podemos esperar para celebrar com você!',
+      backToHome: 'Voltar ao Início',
+
+      // Details page
+      weddingDetails: 'Detalhes do Casamento',
+      everythingYouNeed: 'Tudo que você precisa saber',
+      ceremony: 'Cerimônia',
+      reception: 'Recepção',
+      date: 'Data',
+      time: 'Horário',
+      location: 'Local',
+      address: 'Endereço',
+      dressCode: 'Código de Vestimenta',
+      cocktailAttire: 'Traje de Coquetel',
+      additionalInfo: 'Informações Adicionais',
+      parking: 'Estacionamento: Serviço de manobrista disponível no local da recepção',
+      accommodations: 'Acomodações: Quartos reservados disponíveis no The Plaza Hotel',
+      registry: 'Lista de Presentes: Estamos registrados na Williams Sonoma e Amazon',
+      photography: 'Fotografia: Cerimônia sem dispositivos - por favor, aproveite o momento!',
+
+      // Contact page
+      contactUs: 'Entre em Contato',
+      questionsHelp: 'Dúvidas? Estamos aqui para ajudar!',
+      bride: 'Noiva',
+      groom: 'Noivo',
+      weddingPlanner: 'Organizador de Casamentos',
+
+      // Footer
+      madeWithLove: 'Feito com ❤️',
+    },
+  };
+
+  const t = translations[language];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -27,6 +217,23 @@ const WeddingRSVP = () => {
     console.log('RSVP Data:', rsvpData);
     setSubmitted(true);
   };
+
+  const LanguageSelector = () => (
+    <div className="absolute top-4 right-4 z-20">
+      <select
+        value={language}
+        onChange={(e) => setLanguage(e.target.value)}
+        className="px-3 py-2 rounded-lg text-gray-700 border border-gray-300 focus:outline-none transition-all"
+        style={{ backgroundColor: 'white' }}
+        onFocus={(e) => (e.target.style.borderColor = '#8FBC8B')}
+        onBlur={(e) => (e.target.style.borderColor = '#d1d5db')}
+      >
+        <option value="en">🇺🇸 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="pt">🇧🇷 Português</option>
+      </select>
+    </div>
+  );
 
   const NavigationButton = ({ page, children, active }) => (
     <button
@@ -55,7 +262,7 @@ const WeddingRSVP = () => {
       <div className="space-y-4">
         <Heart className="w-16 h-16 mx-auto animate-pulse" style={{ color: '#8FBC8B' }} />
         <h1 className="text-6xl font-serif font-light tracking-wide">Sarai & Frank</h1>
-        <p className="text-xl opacity-90">are getting married!</p>
+        <p className="text-xl opacity-90">{t.areGettingMarried}</p>
       </div>
 
       <div className="rounded-2xl p-8 max-w-md mx-auto" style={{ backgroundColor: '#8FBC8B', color: 'white' }}>
@@ -80,7 +287,7 @@ const WeddingRSVP = () => {
         onMouseEnter={(e) => (e.target.style.backgroundColor = '#7BAE7B')}
         onMouseLeave={(e) => (e.target.style.backgroundColor = '#8FBC8B')}
       >
-        RSVP Now
+        {t.rsvpNow}
       </button>
     </div>
   );
@@ -90,8 +297,8 @@ const WeddingRSVP = () => {
       return (
         <div className="text-center text-gray-700 space-y-6">
           <Heart className="w-16 h-16 mx-auto" style={{ color: '#8FBC8B' }} />
-          <h2 className="text-4xl font-serif">Thank You!</h2>
-          <p className="text-xl opacity-90">We've received your RSVP and can't wait to celebrate with you!</p>
+          <h2 className="text-4xl font-serif">{t.thankYou}</h2>
+          <p className="text-xl opacity-90">{t.thankYouMessage}</p>
           <button
             onClick={() => {
               setCurrentPage('home');
@@ -102,7 +309,7 @@ const WeddingRSVP = () => {
             onMouseEnter={(e) => (e.target.style.backgroundColor = '#7BAE7B')}
             onMouseLeave={(e) => (e.target.style.backgroundColor = '#8FBC8B')}
           >
-            Back to Home
+            {t.backToHome}
           </button>
         </div>
       );
@@ -111,13 +318,13 @@ const WeddingRSVP = () => {
     return (
       <div className="max-w-md mx-auto">
         <div className="text-center text-gray-700 mb-8">
-          <h2 className="text-4xl font-serif mb-2">RSVP</h2>
-          <p className="opacity-90">Please let us know if you can join us</p>
+          <h2 className="text-4xl font-serif mb-2">{t.rsvpTitle}</h2>
+          <p className="opacity-90">{t.rsvpSubtitle}</p>
         </div>
 
         <div className="rounded-2xl p-6 space-y-4" style={{ backgroundColor: '#8FBC8B' }}>
           <div>
-            <label className="block text-white text-sm font-medium mb-2">Full Name *</label>
+            <label className="block text-white text-sm font-medium mb-2">{t.fullName} *</label>
             <input
               type="text"
               name="guestName"
@@ -128,13 +335,13 @@ const WeddingRSVP = () => {
               style={{ '--tw-ring-color': '#8FBC8B' }}
               onFocus={(e) => (e.target.style.borderColor = '#7BAE7B')}
               onBlur={(e) => (e.target.style.borderColor = '#d1d5db')}
-              placeholder="Enter your full name"
+              placeholder={language === 'en' ? 'Enter your full name' : language === 'es' ? 'Ingresa tu nombre completo' : 'Digite seu nome completo'}
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-white text-sm font-medium mb-2">Email *</label>
+              <label className="block text-white text-sm font-medium mb-2">{t.email} *</label>
               <input
                 type="email"
                 name="email"
@@ -148,7 +355,7 @@ const WeddingRSVP = () => {
               />
             </div>
             <div>
-              <label className="block text-white text-sm font-medium mb-2">Phone</label>
+              <label className="block text-white text-sm font-medium mb-2">{t.phone}</label>
               <input
                 type="tel"
                 name="phone"
@@ -163,7 +370,7 @@ const WeddingRSVP = () => {
           </div>
 
           <div>
-            <label className="block text-white text-sm font-medium mb-2">Will you be attending? *</label>
+            <label className="block text-white text-sm font-medium mb-2">{t.willYouAttend} *</label>
             <div className="space-y-2">
               <label className="flex items-center space-x-3 cursor-pointer">
                 <input
@@ -175,7 +382,7 @@ const WeddingRSVP = () => {
                   className="text-white"
                   style={{ accentColor: 'white' }}
                 />
-                <span className="text-white">Yes, I'll be there! ❤️</span>
+                <span className="text-white">{t.yesIllBeThere}</span>
               </label>
               <label className="flex items-center space-x-3 cursor-pointer">
                 <input
@@ -187,7 +394,7 @@ const WeddingRSVP = () => {
                   className="text-white"
                   style={{ accentColor: 'white' }}
                 />
-                <span className="text-white">Sorry, can't make it 😢</span>
+                <span className="text-white">{t.sorryCannotMake}</span>
               </label>
             </div>
           </div>
@@ -195,7 +402,7 @@ const WeddingRSVP = () => {
           {rsvpData.attendance === 'yes' && (
             <>
               <div>
-                <label className="block text-white text-sm font-medium mb-2">Number of Guests</label>
+                <label className="block text-white text-sm font-medium mb-2">{t.numberOfGuests}</label>
                 <select
                   name="guestCount"
                   value={rsvpData.guestCount}
@@ -204,22 +411,22 @@ const WeddingRSVP = () => {
                   onFocus={(e) => (e.target.style.borderColor = '#7BAE7B')}
                   onBlur={(e) => (e.target.style.borderColor = '#d1d5db')}
                 >
-                  <option value={1}>Just me</option>
-                  <option value={2}>Me + 1</option>
-                  <option value={3}>Me + 2</option>
-                  <option value={4}>Me + 3</option>
+                  <option value={1}>{t.justMe}</option>
+                  <option value={2}>{t.mePlus1}</option>
+                  <option value={3}>{t.mePlus2}</option>
+                  <option value={4}>{t.mePlus3}</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-white text-sm font-medium mb-2">Dietary Restrictions</label>
+                <label className="block text-white text-sm font-medium mb-2">{t.dietaryRestrictions}</label>
                 <input
                   type="text"
                   name="dietaryRestrictions"
                   value={rsvpData.dietaryRestrictions}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 rounded-lg bg-white text-gray-700 placeholder-gray-500 border border-gray-300 focus:outline-none transition-all"
-                  placeholder="Vegetarian, vegan, allergies, etc."
+                  placeholder={t.dietaryPlaceholder}
                   onFocus={(e) => (e.target.style.borderColor = '#7BAE7B')}
                   onBlur={(e) => (e.target.style.borderColor = '#d1d5db')}
                 />
@@ -228,14 +435,14 @@ const WeddingRSVP = () => {
           )}
 
           <div>
-            <label className="block text-white text-sm font-medium mb-2">Special Message</label>
+            <label className="block text-white text-sm font-medium mb-2">{t.specialMessage}</label>
             <textarea
               name="message"
               value={rsvpData.message}
               onChange={handleInputChange}
               rows={3}
               className="w-full px-4 py-3 rounded-lg bg-white text-gray-700 placeholder-gray-500 border border-gray-300 focus:outline-none transition-all resize-none"
-              placeholder="Share your excitement or well wishes..."
+              placeholder={t.messagePlaceholder}
               onFocus={(e) => (e.target.style.borderColor = '#7BAE7B')}
               onBlur={(e) => (e.target.style.borderColor = '#d1d5db')}
             />
@@ -248,7 +455,7 @@ const WeddingRSVP = () => {
             onMouseEnter={(e) => (e.target.style.backgroundColor = '#6BA06B')}
             onMouseLeave={(e) => (e.target.style.backgroundColor = '#7BAE7B')}
           >
-            Submit RSVP
+            {t.submitRsvp}
           </button>
         </div>
       </div>
@@ -258,28 +465,28 @@ const WeddingRSVP = () => {
   const DetailsPage = () => (
     <div className="text-gray-700 space-y-8">
       <div className="text-center">
-        <h2 className="text-4xl font-serif mb-2">Wedding Details</h2>
-        <p className="opacity-90">Everything you need to know</p>
+        <h2 className="text-4xl font-serif mb-2">{t.weddingDetails}</h2>
+        <p className="opacity-90">{t.everythingYouNeed}</p>
       </div>
 
       <div className="grid gap-6">
         <div className="rounded-2xl p-6" style={{ backgroundColor: '#8FBC8B', color: 'white' }}>
           <h3 className="text-2xl font-serif mb-4 flex items-center">
             <Calendar className="w-6 h-6 mr-3 text-white" />
-            Ceremony
+            {t.ceremony}
           </h3>
           <div className="space-y-2 ml-9">
             <p>
-              <strong>Date:</strong> Saturday, June 15, 2024
+              <strong>{t.date}:</strong> Saturday, June 15, 2024
             </p>
             <p>
-              <strong>Time:</strong> 4:00 PM
+              <strong>{t.time}:</strong> 4:00 PM
             </p>
             <p>
-              <strong>Location:</strong> Garden Pavilion, Central Park
+              <strong>{t.location}:</strong> Garden Pavilion, Central Park
             </p>
             <p>
-              <strong>Address:</strong> 830 5th Ave, New York, NY 10065
+              <strong>{t.address}:</strong> 830 5th Ave, New York, NY 10065
             </p>
           </div>
         </div>
@@ -287,20 +494,20 @@ const WeddingRSVP = () => {
         <div className="rounded-2xl p-6" style={{ backgroundColor: '#8FBC8B', color: 'white' }}>
           <h3 className="text-2xl font-serif mb-4 flex items-center">
             <Users className="w-6 h-6 mr-3 text-white" />
-            Reception
+            {t.reception}
           </h3>
           <div className="space-y-2 ml-9">
             <p>
-              <strong>Time:</strong> 6:00 PM - 11:00 PM
+              <strong>{t.time}:</strong> 6:00 PM - 11:00 PM
             </p>
             <p>
-              <strong>Location:</strong> The Plaza Hotel Ballroom
+              <strong>{t.location}:</strong> The Plaza Hotel Ballroom
             </p>
             <p>
-              <strong>Address:</strong> 768 5th Ave, New York, NY 10019
+              <strong>{t.address}:</strong> 768 5th Ave, New York, NY 10019
             </p>
             <p>
-              <strong>Dress Code:</strong> Cocktail Attire
+              <strong>{t.dressCode}:</strong> {t.cocktailAttire}
             </p>
           </div>
         </div>
