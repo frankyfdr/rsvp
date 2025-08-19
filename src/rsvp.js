@@ -66,6 +66,19 @@ const WeddingRSVP = () => {
     detectLocation();
   }, []);
 
+  const appendToExcel = async () => {
+    const rsvpDataArray = Object.values(rsvpData);
+    await fetch('/api/append', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ row: rsvpDataArray }),
+    }).then((response) => {
+      if (response.ok) {
+        setSubmitted(true);
+      }
+    });
+  };
+
   const translations = {
     en: {
       // Navigation
@@ -78,6 +91,7 @@ const WeddingRSVP = () => {
       areGettingMarried: 'are getting married!',
       rsvpNow: 'RSVP Now',
       detectedLocation: 'Detected location',
+      May28: '28th May, 2026',
 
       // RSVP page
       rsvpTitle: 'RSVP',
@@ -106,18 +120,26 @@ const WeddingRSVP = () => {
       weddingDetails: 'Wedding Details',
       everythingYouNeed: 'Everything you need to know',
       ceremony: 'Ceremony',
-      reception: 'Reception',
+      dressCode: 'Dress code',
       date: 'Date',
+      dateMay28: 'Thursday, 28th May, 2026',
       time: 'Time',
       location: 'Location',
       address: 'Address',
       dressCode: 'Dress Code',
+      dressCodeDetails: 'Inpired in earthy tones, warm colors, and soft, elegant shades.',
+      dressCodeDetails2: 'Please ladies, dont wear white or similar colors, and avoid bright or neon tones.',
       cocktailAttire: 'Cocktail Attire',
       additionalInfo: 'Additional Information',
       parking: 'Parking: Valet parking available at reception venue',
       accommodations: 'Accommodations: Room blocks available at The Plaza Hotel',
       registry: "Registry: We're registered at Williams Sonoma and Amazon",
       photography: 'Photography: Unplugged ceremony - please enjoy the moment!',
+      additionalInfoIntro: 'The wedding location is only accessible by private car, or taxi/Uber. Public transport is not available.',
+      additionalInfoSuggestion:
+        'We suggest two options to make your trip easier: if you plan to do some sightseeing, we recommend staying in Barcelona city and on the wedding day taking an Uber or taxi to go and return comfortably.',
+      additionalInfoCelebration: 'If you are coming only for the celebration: here are some nearby accommodation options:',
+      additionalInfoHotels: ['B&B Hotel Barcelona', 'Hotel Molí Cardedeu', 'Aparthotel Atenea Les Suites', 'Pensión Galicia'],
 
       // Contact page
       contactUs: 'Contact Us',
@@ -140,6 +162,7 @@ const WeddingRSVP = () => {
       areGettingMarried: '¡se casan!',
       rsvpNow: 'Confirmar Ahora',
       detectedLocation: 'Ubicación detectada',
+      May28: '28 de mayo de 2026',
 
       // RSVP page
       rsvpTitle: 'Confirmar Asistencia',
@@ -168,14 +191,22 @@ const WeddingRSVP = () => {
       weddingDetails: 'Detalles de la Boda',
       everythingYouNeed: 'Todo lo que necesitas saber',
       ceremony: 'Ceremonia',
-      reception: 'Recepción',
+      dressCode: 'Código de Vestimenta',
       date: 'Fecha',
+      dateMay28: 'Jueves, 28 de mayo de 2026',
       time: 'Hora',
       location: 'Ubicación',
       address: 'Dirección',
       dressCode: 'Código de Vestimenta',
+      dressCodeDetails: 'Inspirado en tonos terrosos, colores cálidos y tonos suaves y elegantes.',
+      dressCodeDetails2: 'Por favor, damas, no usen blanco o colores similares, y eviten tonos brillantes o neón.',
       cocktailAttire: 'Vestimenta de Cóctel',
-      additionalInfo: 'Información Adicional',
+      additionalInfoIntro: 'La ubicación de la boda solo es accesible en coche privado, o taxi/Uber. No hay transporte público disponible.',
+      additionalInfoSuggestion:
+        'Sugerimos dos opciones para facilitar tu viaje: si planeas hacer turismo, te recomendamos quedarte en la ciudad de Barcelona y el día de la boda tomar un Uber o taxi para ir y volver cómodamente.',
+      additionalInfoCelebration: 'Si vienes solo para la celebración: aquí tienes algunas opciones de alojamiento cercanas:',
+      additionalInfoHotels: ['B&B Hotel Barcelona', 'Hotel Molí Cardedeu', 'Aparthotel Atenea Les Suites', 'Pensión Galicia'],
+
       parking: 'Estacionamiento: Servicio de valet disponible en el lugar de la recepción',
       accommodations: 'Alojamiento: Habitaciones reservadas disponibles en The Plaza Hotel',
       registry: 'Registro: Estamos registrados en Williams Sonoma y Amazon',
@@ -202,6 +233,7 @@ const WeddingRSVP = () => {
       areGettingMarried: 'vão se casar!',
       rsvpNow: 'Confirmar Agora',
       detectedLocation: 'Localização detectada',
+      May28: '28 de maio de 2026',
 
       // RSVP page
       rsvpTitle: 'Confirmar Presença',
@@ -232,12 +264,20 @@ const WeddingRSVP = () => {
       ceremony: 'Cerimônia',
       reception: 'Recepção',
       date: 'Data',
+      dateMay28: 'Quinta-feira, 28 de maio de 2026',
       time: 'Horário',
       location: 'Local',
       address: 'Endereço',
       dressCode: 'Código de Vestimenta',
+      dressCodeDetails: 'Inspirado em tons terrosos, cores quentes e tons suaves e elegantes.',
+      dressCodeDetails2: 'Por favor, senhoras, não usem branco ou cores semelhantes, e evitem tons brilhantes ou neon.',
       cocktailAttire: 'Traje de Coquetel',
       additionalInfo: 'Informações Adicionais',
+      additionalInfoIntro: 'O local da cerimônia só é acessível por carro particular, ou táxi/Uber. Não há transporte público disponível.',
+      additionalInfoSuggestion:
+        'Sugerimos duas opções para facilitar sua viagem: se você planeja fazer turismo, recomendamos ficar na cidade de Barcelona e no dia do casamento pegar um Uber ou táxi para ir e voltar confortavelmente.',
+      additionalInfoCelebration: 'Se você está vindo apenas para a celebração: aqui estão algumas opções de hospedagem próximas:',
+      additionalInfoHotels: ['B&B Hotel Barcelona', 'Hotel Molí Cardedeu', 'Aparthotel Atenea Les Suites', 'Pensión Galicia'],
       parking: 'Estacionamento: Serviço de manobrista disponível no local da recepção',
       accommodations: 'Acomodações: Quartos reservados disponíveis no The Plaza Hotel',
       registry: 'Lista de Presentes: Estamos registrados na Williams Sonoma e Amazon',
@@ -263,12 +303,6 @@ const WeddingRSVP = () => {
       ...prev,
       [name]: value,
     }));
-  };
-
-  const handleSubmit = () => {
-    // In a real app, you would send this data to your backend
-    console.log('RSVP Data:', rsvpData);
-    setSubmitted(true);
   };
 
   const LanguageSelector = () => (
@@ -325,15 +359,15 @@ const WeddingRSVP = () => {
         <div className="space-y-3">
           <div className="flex items-center justify-center space-x-3">
             <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-            <span className="text-base sm:text-lg">June 15, 2024</span>
+            <span className="text-base sm:text-lg">28 May, 2026</span>
           </div>
           <div className="flex items-center justify-center space-x-3">
             <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-            <span className="text-base sm:text-lg">4:00 PM</span>
+            <span className="text-base sm:text-lg">5:00 PM</span>
           </div>
-          <div className="flex items-center justify-center space-x-3">
+          <div className="flex justify-center space-x-3">
             <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-            <span className="text-base sm:text-lg text-center">Garden Pavilion, Central Park</span>
+            <span className="text-base sm:text-lg text-center">{t.May28}</span>
           </div>
         </div>
       </div>
@@ -510,15 +544,15 @@ const WeddingRSVP = () => {
               value={rsvpData.message}
               onChange={handleInputChange}
               rows={3}
-              className="w-full px-4 py-3 rounded-lg bg-white text-gray-700 placeholder-gray-500 border border-gray-300 focus:outline-none transition-all resize-none text-sm sm:text-base"
+              className="w-full px-4 py-3 rounded-lg bg-white text-gray-700 placeholder-gray-500 
+             border border-gray-300 focus:border-[#7BAE7B] focus:outline-none 
+             transition-all resize-none text-sm sm:text-base"
               placeholder={t.messagePlaceholder}
-              onFocus={(e) => (e.target.style.borderColor = '#7BAE7B')}
-              onBlur={(e) => (e.target.style.borderColor = '#d1d5db')}
             />
           </div>
 
           <button
-            onClick={handleSubmit}
+            onClick={appendToExcel}
             className="w-full text-white py-3 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             style={{ backgroundColor: '#7BAE7B' }}
             onMouseEnter={(e) => (e.target.style.backgroundColor = '#6BA06B')}
@@ -546,16 +580,16 @@ const WeddingRSVP = () => {
           </h3>
           <div className="space-y-2 ml-8 sm:ml-9 text-sm sm:text-base">
             <p>
-              <strong>{t.date}:</strong> Saturday, June 15, 2024
+              <strong>{t.date}:</strong> {t.dateMay28}
             </p>
             <p>
               <strong>{t.time}:</strong> 4:00 PM
             </p>
             <p>
-              <strong>{t.location}:</strong> Garden Pavilion, Central Park
+              <strong>{t.location}:</strong> Casa Paratgea
             </p>
             <p>
-              <strong>{t.address}:</strong> 830 5th Ave, New York, NY 10065
+              <strong>{t.address}:</strong> Camino a Can Canal, B-510, 08450 Llinars del Vallès, Barcelona, Spain
             </p>
           </div>
         </div>
@@ -563,20 +597,14 @@ const WeddingRSVP = () => {
         <div className="rounded-2xl p-4 sm:p-6" style={{ backgroundColor: '#8FBC8B', color: 'white' }}>
           <h3 className="text-xl sm:text-2xl font-serif mb-4 flex items-center">
             <Users className="w-5 h-5 sm:w-6 sm:h-6 mr-3 text-white flex-shrink-0" />
-            {t.reception}
+            {t.dressCode}
           </h3>
           <div className="space-y-2 ml-8 sm:ml-9 text-sm sm:text-base">
             <p>
-              <strong>{t.time}:</strong> 6:00 PM - 11:00 PM
+              <i>{t.dressCodeDetails}</i>
             </p>
             <p>
-              <strong>{t.location}:</strong> The Plaza Hotel Ballroom
-            </p>
-            <p>
-              <strong>{t.address}:</strong> 768 5th Ave, New York, NY 10019
-            </p>
-            <p>
-              <strong>{t.dressCode}:</strong> {t.cocktailAttire}
+              <i>{t.dressCodeDetails2}</i>
             </p>
           </div>
         </div>
@@ -584,18 +612,18 @@ const WeddingRSVP = () => {
         <div className="rounded-2xl p-4 sm:p-6" style={{ backgroundColor: '#8FBC8B', color: 'white' }}>
           <h3 className="text-xl sm:text-2xl font-serif mb-4">{t.additionalInfo}</h3>
           <div className="space-y-2 text-sm sm:text-base">
-            <p>
-              <strong>Parking:</strong> Valet parking available at reception venue
-            </p>
-            <p>
-              <strong>Accommodations:</strong> Room blocks available at The Plaza Hotel
-            </p>
-            <p>
-              <strong>Registry:</strong> We're registered at Williams Sonoma and Amazon
-            </p>
-            <p>
-              <strong>Photography:</strong> Unplugged ceremony - please enjoy the moment!
-            </p>
+            <section className="max-w-3xl mx-auto px-6 py-10 text-white-800">
+              <p className="mb-4">{t.additionalInfoIntro}</p>
+              <p className="mb-4">{t.additionalInfoSuggestion}</p>
+              <p className="mb-4">{t.additionalInfoCelebration}</p>
+              <ul className="list-disc pl-6 space-y-2">
+                {t.additionalInfoHotels.map((hotel, index) => (
+                  <li key={index} className="text-white">
+                    {hotel}
+                  </li>
+                ))}
+              </ul>
+            </section>
           </div>
         </div>
       </div>
@@ -615,11 +643,16 @@ const WeddingRSVP = () => {
           <div className="space-y-3 text-sm sm:text-base">
             <div className="flex items-center justify-center space-x-3">
               <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
-              <span className="break-all">sarai@email.com</span>
+              <span className="break-all">sarailozada682@gmail.com</span>
             </div>
             <div className="flex items-center justify-center space-x-3">
               <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
-              <span>(555) 123-4567</span>
+              <span>
+                {' '}
+                <a target="_blank" href="https://wa.link/ieg6iu">
+                  (+34) 624 48 24 59
+                </a>
+              </span>
             </div>
           </div>
         </div>
@@ -629,11 +662,13 @@ const WeddingRSVP = () => {
           <div className="space-y-3 text-sm sm:text-base">
             <div className="flex items-center justify-center space-x-3">
               <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
-              <span className="break-all">frank@email.com</span>
+              <span className="break-all">fdr.franklin@gmail.com</span>
             </div>
             <div className="flex items-center justify-center space-x-3">
               <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
-              <span>(555) 987-6543</span>
+              <a href="https://wa.link/ptb68t" target="_blank">
+                (+34) 641 829 850
+              </a>
             </div>
           </div>
         </div>
@@ -695,7 +730,7 @@ const WeddingRSVP = () => {
 
         {/* Footer */}
         <footer className="text-center text-gray-600 mt-12 sm:mt-16 px-4">
-          <p className="text-xs sm:text-sm">Sarai & Frank • May 26, 2026 • {t.madeWithLove}</p>
+          <p className="text-xs sm:text-sm">Sarai & Frank • May 28, 2026 • {t.madeWithLove}</p>
         </footer>
       </div>
     </div>
