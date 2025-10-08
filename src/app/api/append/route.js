@@ -5,41 +5,39 @@ const SHEET_ID = process.env.GOOGLE_SHEET_ID; // put in .env.local
 
 export async function POST(req) {
   try {
+    // Read the service account JSON from env (base64-decoded)
     const body = await req.json();
-    const { row } = body; // e.g. ["Banana", 25, "2025-08-16"]
+    const keyBase64 = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_BASE64;
+    if (!keyBase64) {
+      throw new Error('Missing service account key env var');
+    }
+    const keyJson = JSON.parse(Buffer.from(keyBase64, 'base64').toString('utf8'));
 
-    // Load credentials from env (you can also load from JSON file)
+    // auth client
     const auth = new google.auth.GoogleAuth({
-      credentials: {
-        type: process.env.GOOGLE_TYPE,
-        project_id: process.env.GOOGLE_PROJECT_ID,
-        private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
-        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        auth_uri: process.env.GOOGLE_AUTH_URI,
-        token_uri: process.env.GOOGLE_TOKEN_URI,
-        auth_provider_x509_cert_url: process.env.GOOGLE_AUTH_PROVIDER,
-        client_x509_cert_url: process.env.GOOGLE_CLIENT_CERT_URL,
-      },
+      credentials: keyJson,
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
 
     const sheets = google.sheets({ version: 'v4', auth });
 
-    // Append the row
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: SHEET_ID,
-      range: 'Sheet1!A:C', // adjust to your sheet/range
+    const spreadsheetId = process.env.SHEET_ID; // from .env
+    const range = 'Invited!A:C'; // where to append — adjust to your sheet & columns
+    const values = body.rows.map((row) => [...row, new Date().toISOString()]);
+    console.log('Values to append:', values);
+    const response = await sheets.spreadsheets.values.append({
+      spreadsheetId,
+      range,
       valueInputOption: 'USER_ENTERED',
+      insertDataOption: 'INSERT_ROWS',
       requestBody: {
-        values: [row],
+        values,
       },
     });
 
-    return NextResponse.json({ success: true, message: 'Row appended' });
+    return Response.json({ ok: true, result: response.data }, { status: 200 });
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ success: false, error: err.message }, { status: 500 });
+    console.error('append-invite error:', err);
+    return Response.json({ ok: false, error: err.message }, { status: 500 });
   }
 }
