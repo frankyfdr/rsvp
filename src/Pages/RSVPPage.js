@@ -103,7 +103,7 @@ export const RSVPPage = ({ t }) => {
   if (submitted) {
     return (
       <div className="text-center text-gray-700 space-y-6 px-4">
-        <Heart className="w-12 h-12 sm:w-16 sm:h-16 mx-auto" style={{ color: '#8FBC8B' }} />
+        <Heart className="w-12 h-12 sm:w-16 sm:h-16 mx-auto" style={{ color: '#435942' }} />
         <h2 className="text-3xl sm:text-4xl font-serif">{t.thankYou}</h2>
         <p className="text-lg sm:text-xl opacity-90">{t.thankYouMessage}</p>
         <button
@@ -112,7 +112,7 @@ export const RSVPPage = ({ t }) => {
             setSubmitted(false);
           }}
           className="text-white px-6 py-3 rounded-full transition-all duration-300"
-          style={{ backgroundColor: '#8FBC8B' }}
+          style={{ backgroundColor: '#435942' }}
         >
           {t.backToHome}
         </button>
@@ -126,7 +126,7 @@ export const RSVPPage = ({ t }) => {
         <p className="opacity-90 text-sm sm:text-base">{t.rsvpSubtitle}</p>
       </div>
 
-      <div className="rounded-2xl p-4 sm:p-6 space-y-4" style={{ backgroundColor: '#8FBC8B' }}>
+      <div className="rounded-2xl p-4 sm:p-6 space-y-4" style={{ backgroundColor: '#435942' }}>
         {/* contact & message */}
         <div>
           <label className="block text-white text-sm font-medium mb-2">{t.email}</label>

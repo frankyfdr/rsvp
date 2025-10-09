@@ -83,10 +83,15 @@ const WeddingRSVP = () => {
       thankYouMessage: "We've received your RSVP and can't wait to celebrate with you!",
       backToHome: 'Back to Home',
       numberOfGuests: 'Number of Guests',
+      bride: 'Bride',
+      groom: 'Groom',
       madeWithLove: 'Made with ❤️',
       invitationFor: 'Invitation for ',
+      celebrateWithUs: 'Celebrate with us!',
     },
     es: {
+      bride: 'Novia',
+      groom: 'Novio',
       home: 'Inicio',
       rsvp: 'Confirmar',
       details: 'Detalles',
@@ -111,8 +116,11 @@ const WeddingRSVP = () => {
       numberOfGuests: 'Número de Invitados',
       madeWithLove: 'Hecho con ❤️',
       invitationFor: 'Invitación para ',
+      celebrateWithUs: '¡Celebra con nosotros!',
     },
     pt: {
+      bride: 'Noiva',
+      groom: 'Noivo',
       home: 'Início',
       rsvp: 'Confirmar',
       details: 'Detalhes',
@@ -137,6 +145,7 @@ const WeddingRSVP = () => {
       numberOfGuests: 'Número de Convidados',
       madeWithLove: 'Feito com ❤️',
       invitationFor: 'Convite para ',
+      celebrateWithUs: 'Celebre conosco!',
     },
   };
 
@@ -159,35 +168,35 @@ const WeddingRSVP = () => {
   );
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-[#FAF4E6] relative overflow-hidden">
       <LanguageSelector />
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 py-6 sm:py-8 pt-20 sm:pt-16">
         <nav className="flex justify-center space-x-2 sm:space-x-4 mb-8 sm:mb-12 overflow-x-auto">
           <button
             onClick={() => setCurrentPage('home')}
-            style={{ backgroundColor: '#8FBC8B' }}
+            style={{ backgroundColor: '#435942' }}
             className={`px-3 hover:cursor-pointer py-2 sm:px-6 sm:py-2 rounded-full`}
           >
             Home
           </button>
           <button
             onClick={() => setCurrentPage('rsvp')}
-            style={{ backgroundColor: '#8FBC8B' }}
+            style={{ backgroundColor: '#435942' }}
             className={`px-3 hover:cursor-pointer py-2 sm:px-6 sm:py-2 rounded-full`}
           >
             RSVP
           </button>
           <button
             onClick={() => setCurrentPage('details')}
-            style={{ backgroundColor: '#8FBC8B' }}
+            style={{ backgroundColor: '#435942' }}
             className={`px-3 hover:cursor-pointer py-2 sm:px-6 sm:py-2 rounded-full`}
           >
             Details
           </button>
           <button
             onClick={() => setCurrentPage('contact')}
-            style={{ backgroundColor: '#8FBC8B' }}
+            style={{ backgroundColor: '#435942' }}
             className={`px-3 hover:cursor-pointer py-2 sm:px-6 sm:py-2 rounded-full`}
           >
             Contact
@@ -202,7 +211,7 @@ const WeddingRSVP = () => {
         </main>
 
         <footer className="text-center text-gray-600 mt-12 sm:mt-16 px-4">
-          <p className="text-xs sm:text-sm">Sarai & Frank • May 28, 2026 • {t.madeWithLove}</p>
+          <p className="text-xs sm:text-sm">Sarai & Frank • May 28, 2026 • </p>
         </footer>
       </div>
     </div>
