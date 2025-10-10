@@ -17,7 +17,7 @@ export const DetailsPage = () => (
             <strong>Date:</strong> Thursday, 28th May, 2026
           </p>
           <p>
-            <strong>Time:</strong> 5:00 PM
+            <strong>Time:</strong> 3:00 PM
           </p>
           <p>
             <strong>Location:</strong> Casa Paratgea, Barcelona, Spain
